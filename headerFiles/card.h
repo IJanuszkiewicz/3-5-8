@@ -19,7 +19,7 @@ public:
     int getNumber() const {return number;}
     suits getSuit() const {return suit;}
 
-    friend std::wostream& operator<<(std::wostream& out, const card& c);
+    friend std::ostream& operator<<(std::ostream& out, const card& c);
 };
 
 

@@ -7,8 +7,6 @@
 #include "player.h"
 
 class game358 {
-
-
     player players[3];
     int round;
 

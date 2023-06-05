@@ -9,6 +9,7 @@
 void game358::start(){
     round = 0;
     dealCards();
+    players[0].showCards(std::cout);
 
 }
 
@@ -26,7 +27,11 @@ void game358::dealCards(){
     std::vector<card> cards = generateAllCards();
     std::shuffle(cards.begin(), cards.end(), std::mt19937(std::random_device()()));
     while (!cards.empty()){
-        players[i].addCard(cards.front());
+        players[i % 3].addCard(cards.back());
+        cards.pop_back();
         ++i;
     }
+    players[0].sortCards();
+    players[1].sortCards();
+    players[2].sortCards();
 }

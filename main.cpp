@@ -1,7 +1,7 @@
-#include <iostream>
-#include "headerFiles/card.h"
+#include "headerFiles/game358.h"
 
 int main(){
-    card card(11, card::suits::CLUBS);
-    std::wcout << card;
+    game358 game;
+    game.start();
+
 }

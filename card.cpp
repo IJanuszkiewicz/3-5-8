@@ -4,7 +4,7 @@
 
 #include "headerFiles/card.h"
 
-std::wostream &operator<<(std::wostream &out,const card& c) {
+std::ostream &operator<<(std::ostream &out,const card& c) {
     switch (c.number){
         case 11:
             out << 'J';
