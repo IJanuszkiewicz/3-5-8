@@ -7,12 +7,12 @@
 
 #include "card.h"
 #include <vector>
-#include <unordered_map>
+#include <map>
 
 class player {
     enum class roundType{HEARTS, CLUBS, DIAMONDS, SPADES, NT, MIZ};
     std::vector<card> cards;
-    std::unordered_map<roundType, bool> roundsPlayed;
+    std::map<roundType, bool> roundsPlayed;
     int points;
     static int numPlayers;
     int id;
@@ -23,9 +23,13 @@ public:
     void changeCards(const std::vector<card>& cards){this->cards = cards;}
     void addCard(const card& c) {cards.push_back(c);}
     void sortCards();
-    friend class game358;
+    roundType chooseRoundType();
+
+    void showAvRoundTypes(std::ostream& out) const;
     std::ostream &showCards(std::ostream& out) const;
     friend std::ostream& operator<<(std::ostream& out, const player& p);
+
+    friend class game358;
     ~player(){numPlayers--;}
 };
 
