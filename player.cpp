@@ -43,7 +43,6 @@ player::roundType player::chooseRoundType() {
         std::cin >> rt;
     }while (rt > 5 || rt < 0 || roundsPlayed[static_cast<roundType>(rt)]);
     roundsPlayed[static_cast<roundType>(rt)] = true;
-    showAvRoundTypes(std::cout);
     return static_cast<roundType>(rt);
 }
 
