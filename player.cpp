@@ -74,3 +74,7 @@ void player::showAvRoundTypes(std::ostream &out) const {
     });
 }
 
+void player::addCards(const std::vector<card> cards) {
+    this->cards.insert(this->cards.begin(), cards.begin(), cards.end());
+}
+

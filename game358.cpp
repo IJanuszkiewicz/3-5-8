@@ -8,16 +8,27 @@
 
 void game358::start(){
     round = 0;
+
     roundStart();
 
 }
 
 void game358::roundStart() {
-    std::vector<card> cards = generateAllCards();
-    std::shuffle(cards.begin(), cards.end(), std::mt19937(std::random_device()()));
-    players[round % 3].changeCards(std::vector<card>(cards.begin(), cards.begin() + CHOOSING_CARDS_NUM));
+    deck = generateAllCards();
+    std::shuffle(deck.begin(), deck.end(), std::mt19937(std::random_device()()));
+    players[round % 3].changeCards(std::vector<card>(deck.begin(), deck.begin() + CHOOSING_CARDS_NUM));
+    deck.erase(deck.begin(), deck.begin() + CHOOSING_CARDS_NUM);
     players[round % 3].sortCards();
     currentRoundType = players[round % 3].chooseRoundType();
+
+    players[round % 3].addCards(std::vector<card>(
+            deck.begin(), deck.begin() + CARDS_PER_PLAYER - CHOOSING_CARDS_NUM));
+    deck.erase(deck.begin(), deck.begin() + CARDS_PER_PLAYER - CHOOSING_CARDS_NUM);
+
+    players[(round + 1) % 3].addCards(std::vector<card>(deck.begin(), deck.begin() + CARDS_PER_PLAYER));
+    deck.erase(deck.begin(), deck.begin() + CARDS_PER_PLAYER);
+    players[(round + 2) % 3].addCards(std::vector<card>(deck.begin(), deck.begin() + CARDS_PER_PLAYER));
+    deck.erase(deck.begin(), deck.begin() + CARDS_PER_PLAYER);
 
 }
 

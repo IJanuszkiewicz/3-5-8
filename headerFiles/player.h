@@ -22,6 +22,7 @@ public:
     void clearHand(){cards.clear();}
     void changeCards(const std::vector<card>& cards){this->cards = cards;}
     void addCard(const card& c) {cards.push_back(c);}
+    void addCards(const std::vector<card> cards);
     void sortCards();
     roundType chooseRoundType();
 

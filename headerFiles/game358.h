@@ -10,11 +10,13 @@
 #define NUM_SUITS 4
 #define NUM_CARDS_IN_SUIT 13
 #define CHOOSING_CARDS_NUM 6
+#define CARDS_PER_PLAYER 16
 
 class game358 {
     player players[3];
     int round;
     player::roundType currentRoundType;
+    std::vector<card> deck;
 
     void dealCards();
     void roundStart();
