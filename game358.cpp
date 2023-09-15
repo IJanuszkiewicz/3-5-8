@@ -22,12 +22,16 @@ void game358::roundStart() {
     currentRoundType = players[round % 3].chooseRoundType();
 
     players[round % 3].addCards(std::vector<card>(
-            deck.begin(), deck.begin() + CARDS_PER_PLAYER - CHOOSING_CARDS_NUM));
-    deck.erase(deck.begin(), deck.begin() + CARDS_PER_PLAYER - CHOOSING_CARDS_NUM);
+            deck.begin(), deck.begin() + CARDS_PER_PLAYER - CHOOSING_CARDS_NUM + CARDS_TO_DISCARD));
+    players[round % 3].sortCards();
+    players[round % 3].discardCards();
+    deck.erase(deck.begin(), deck.begin() + CARDS_PER_PLAYER - CHOOSING_CARDS_NUM + CARDS_TO_DISCARD);
 
     players[(round + 1) % 3].addCards(std::vector<card>(deck.begin(), deck.begin() + CARDS_PER_PLAYER));
+    players[(round + 1) % 3].sortCards();
     deck.erase(deck.begin(), deck.begin() + CARDS_PER_PLAYER);
     players[(round + 2) % 3].addCards(std::vector<card>(deck.begin(), deck.begin() + CARDS_PER_PLAYER));
+    players[(round + 2) % 3].sortCards();
     deck.erase(deck.begin(), deck.begin() + CARDS_PER_PLAYER);
 
 }

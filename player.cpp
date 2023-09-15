@@ -19,9 +19,10 @@ std::ostream &operator<<(std::ostream &out, const player &p) {
 }
 
 std::ostream &player::showCards(std::ostream &out) const {
+    int i = 0;
     out << "player " << id << ", cards:" << std::endl;
-    for_each(cards.begin(), cards.end(), [&out](const card& c){
-        out << c << ' ';
+    for_each(cards.begin(), cards.end(), [&out, &i](const card& c){
+        out << i++ <<": " << c << ' ' << std::endl;
     });
     return out;
 }
@@ -76,5 +77,15 @@ void player::showAvRoundTypes(std::ostream &out) const {
 
 void player::addCards(const std::vector<card> cards) {
     this->cards.insert(this->cards.begin(), cards.begin(), cards.end());
+}
+
+void player::discardCards() {
+    int number;
+    for(int i = 0; i < 4; ++i) {
+        showCards(std::cout);
+        std::cout << "choose card to discard: ";
+        std::cin >> number;
+        cards.erase(cards.begin() + number);
+    }
 }
 

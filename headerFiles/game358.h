@@ -11,6 +11,7 @@
 #define NUM_CARDS_IN_SUIT 13
 #define CHOOSING_CARDS_NUM 6
 #define CARDS_PER_PLAYER 16
+#define CARDS_TO_DISCARD 4
 
 class game358 {
     player players[3];

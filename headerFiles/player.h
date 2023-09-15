@@ -24,6 +24,7 @@ public:
     void addCard(const card& c) {cards.push_back(c);}
     void addCards(const std::vector<card> cards);
     void sortCards();
+    void discardCards();
     roundType chooseRoundType();
 
     void showAvRoundTypes(std::ostream& out) const;
