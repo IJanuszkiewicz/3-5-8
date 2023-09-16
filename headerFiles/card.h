@@ -15,7 +15,7 @@ private:
 
 public:
 
-    card(int number, suits suit): suit(suit), number(number) {}
+    card(int number=14, suits suit=suits::CLUBS): suit(suit), number(number) {}
     int getNumber() const {return number;}
     suits getSuit() const {return suit;}
 

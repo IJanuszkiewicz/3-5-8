@@ -18,6 +18,19 @@ std::ostream &operator<<(std::ostream &out, const player &p) {
     return out;
 }
 
+card::suits convertToSuit(player::roundType rt) {
+    switch (rt) {
+        case player::roundType::CLUBS:
+            return card::suits::CLUBS;
+        case player::roundType::HEARTS:
+            return card::suits::HEARTS;
+        case player::roundType::DIAMONDS:
+            return card::suits::DIAMONDS;
+        case player::roundType::SPADES:
+            return card::suits::SPADES;
+    }
+}
+
 std::ostream &player::showCards(std::ostream &out) const {
     int i = 0;
     out << "player " << id << ", cards:" << std::endl;
@@ -87,5 +100,16 @@ void player::discardCards() {
         std::cin >> number;
         cards.erase(cards.begin() + number);
     }
+}
+
+card player::playCard() {
+    int cardInd;
+    card toReturn;
+    showCards(std::cout);
+    std::cout << "choose card to play: ";
+    std::cin >> cardInd;
+    toReturn = cards[cardInd];
+    cards.erase(cards.begin() + cardInd);
+    return toReturn;
 }
 

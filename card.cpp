@@ -15,7 +15,7 @@ std::ostream &operator<<(std::ostream &out,const card& c) {
         case 13:
             out << 'K';
             break;
-        case 1:
+        case 14:
             out << 'A';
             break;
         default:

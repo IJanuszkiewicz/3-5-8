@@ -10,10 +10,12 @@
 #include <map>
 
 class player {
+public:
     enum class roundType{HEARTS, CLUBS, DIAMONDS, SPADES, NT, MIZ};
+private:
     std::vector<card> cards;
     std::map<roundType, bool> roundsPlayed;
-    int points;
+    int points, tricks;
     static int numPlayers;
     int id;
 public:
@@ -25,6 +27,7 @@ public:
     void addCards(const std::vector<card> cards);
     void sortCards();
     void discardCards();
+    card playCard();
     roundType chooseRoundType();
 
     void showAvRoundTypes(std::ostream& out) const;
@@ -35,5 +38,6 @@ public:
     ~player(){numPlayers--;}
 };
 
+card::suits convertToSuit(player::roundType rt);
 
 #endif //INC_3_5_8_PLAYER_H

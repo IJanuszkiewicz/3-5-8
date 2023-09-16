@@ -12,6 +12,7 @@
 #define CHOOSING_CARDS_NUM 6
 #define CARDS_PER_PLAYER 16
 #define CARDS_TO_DISCARD 4
+#define CARDS_IN_DECK 52
 
 class game358 {
     player players[3];
@@ -20,7 +21,8 @@ class game358 {
     std::vector<card> deck;
 
     void dealCards();
-    void roundStart();
+    void roundSetup();
+    void playRound();
     std::vector<card> generateAllCards() const;
 public:
     void start();
