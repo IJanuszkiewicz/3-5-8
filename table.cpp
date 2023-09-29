@@ -76,4 +76,26 @@ void table::show() {
         });
         std::cout << std::endl;
     }
+    std::cout << "round type: ";
+    switch (rt) {
+        case player::roundType::HEARTS:
+            std::cout << "HEARTS";
+            break;
+        case player::roundType::CLUBS:
+            std::cout << "CLUBS";
+            break;
+        case player::roundType::DIAMONDS:
+            std::cout << "DIAMONDS";
+            break;
+        case player::roundType::SPADES:
+            std::cout << "SPADES";
+            break;
+        case player::roundType::NT:
+            std::cout << "NO TRUMPS";
+            break;
+        case player::roundType::MIZ:
+            std::cout << "MIZ";
+            break;
+    }
+    std::cout << std::endl;
 }

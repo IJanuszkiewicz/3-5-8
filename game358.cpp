@@ -5,12 +5,15 @@
 #include "headerFiles/game358.h"
 #include <algorithm>
 #include <random>
+#include "stdlib.h"
 
 void game358::start(){
     round = 0;
-
-    roundSetup();
-    playRound();
+    while (round < 16) {
+        roundSetup();
+        playRound();
+        ++round;
+    }
 }
 
 void game358::roundSetup() {
@@ -63,18 +66,29 @@ void game358::playRound() {
     int leadPlayer = round % 3;
     table table(currentRoundType);
     for (int i = 0; i < (CARDS_IN_DECK - CARDS_TO_DISCARD) / 3; ++i){
-        table.addFirstCard(players[leadPlayer].playCard());
+        system("cls");
+        table.show();
         std::cout << std::endl;
+        table.addFirstCard(players[leadPlayer].playCard());
+
+        system("cls");
         table.show();
         std::cout << std::endl;
         while(!table.addCard(players[(leadPlayer + 1) % 3].playCard(), players[(leadPlayer + 1) % 3].cards)){
             players[(leadPlayer + 1) % 3].sortCards();
+            system("cls");
+            table.show();
+            std::cout << std::endl;
         }
-        std::cout << std::endl;
+
+        system("cls");
         table.show();
         std::cout << std::endl;
         while(!table.addCard(players[(leadPlayer + 2) % 3].playCard(), players[(leadPlayer + 2) % 3].cards)){
             players[(leadPlayer + 2) % 3].sortCards();
+            system("cls");
+            table.show();
+            std::cout << std::endl;
         }
 
         players[(leadPlayer + table.trickWinner()) % 3].tricks += 1;
