@@ -61,47 +61,46 @@ void game358::dealCards(){
 
 void game358::playRound() {
     int leadPlayer = round % 3;
-    card table[3];
-    bool legal;
+    table table(currentRoundType);
     for (int i = 0; i < (CARDS_IN_DECK - CARDS_TO_DISCARD) / 3; ++i){
-        legal = true;
-        table[0] = players[leadPlayer].playCard();
-        do {
-            table[1] = players[(leadPlayer + 1) % 3].playCard();
-            if (table[0].getSuit() != table[1].getSuit()) {
-                if (std::count_if(players[(leadPlayer + 1) % 3].cards.begin(),
-                                  players[(leadPlayer + 1) % 3].cards.end(), [table](const card c) {
-                            if (c.getSuit() == table[0].getSuit())
-                                return true;
-                            else return false;
-                        }) != 0) {
-                    legal = false;
-                    std::cout << "suits must match!" << std::endl;
-                    players[(leadPlayer + 1) % 3].addCard(table[1]);
-                    players[(leadPlayer + 1) % 3].sortCards();
-                }
-            }
-        } while(!legal);
-        legal = true;
-        do {
-            table[2] = players[(leadPlayer + 2) % 3].playCard();
-            if (table[0].getSuit() != table[2].getSuit()) {
-                if (std::count_if(players[(leadPlayer + 2) % 3].cards.begin(),
-                                  players[(leadPlayer + 2) % 3].cards.end(), [table](const card c) {
-                            if (c.getSuit() == table[0].getSuit())
-                                return true;
-                            else return false;
-                        }) != 0) {
-                    legal = false;
-                    std::cout << "suits must match!" << std::endl;
-                    players[(leadPlayer + 2) % 3].addCard(table[1]);
-                    players[(leadPlayer + 2) % 3].sortCards();
-                }
-            }
-        } while(!legal);
+        table.addFirstCard(players[leadPlayer].playCard());
+        std::cout << std::endl;
+        table.show();
+        std::cout << std::endl;
+        while(!table.addCard(players[(leadPlayer + 1) % 3].playCard(), players[(leadPlayer + 1) % 3].cards)){
+            players[(leadPlayer + 1) % 3].sortCards();
+        }
+        std::cout << std::endl;
+        table.show();
+        std::cout << std::endl;
+        while(!table.addCard(players[(leadPlayer + 2) % 3].playCard(), players[(leadPlayer + 2) % 3].cards)){
+            players[(leadPlayer + 2) % 3].sortCards();
+        }
 
-
+        players[(leadPlayer + table.trickWinner()) % 3].tricks += 1;
+        leadPlayer = (leadPlayer + table.trickWinner()) % 3;
+        table.reset();
     }
+
+    if (currentRoundType == player::roundType::MIZ){
+        players[round % 3].points += 3 - players[round % 3].tricks;
+        players[round % 3].tricks = 0;
+
+        players[(round + 1) % 3].points += 5 - players[(round + 1) % 3].tricks;
+        players[(round + 1) % 3].tricks = 0;
+
+        players[(round + 2) % 3].points += 8 - players[(round + 2) % 3].tricks;
+        players[(round + 2) % 3].tricks = 0;
+        return;
+    }
+    players[round % 3].points += players[round % 3].tricks - 8;
+    players[round % 3].tricks = 0;
+
+    players[(round + 1) % 3].points += players[(round + 1) % 3].tricks - 5;
+    players[(round + 1) % 3].tricks = 0;
+
+    players[(round + 2) % 3].points += players[(round + 2) % 3].tricks - 3;
+    players[(round + 2) % 3].tricks = 0;
 }
 
 

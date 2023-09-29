@@ -6,6 +6,7 @@
 #define INC_3_5_8_GAME358_H
 
 #include "player.h"
+#include "table.h"
 
 #define NUM_SUITS 4
 #define NUM_CARDS_IN_SUIT 13

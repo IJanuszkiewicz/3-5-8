@@ -6,7 +6,7 @@
 #include <algorithm>
 int player::numPlayers = 0;
 
-player::player(): points(0), id(++numPlayers), roundsPlayed() {
+player::player(): points(0), tricks(0), id(++numPlayers), roundsPlayed() {
     for (int i = 0; i < 6; ++i) {
         roundsPlayed.insert(std::make_pair(static_cast<roundType>(i), false));
     }
@@ -33,7 +33,7 @@ card::suits convertToSuit(player::roundType rt) {
 
 std::ostream &player::showCards(std::ostream &out) const {
     int i = 0;
-    out << "player " << id << ", cards:" << std::endl;
+    out << "player " << id << ", points total: " << points << ", tricks this round: " << tricks << ", cards:" << std::endl;
     for_each(cards.begin(), cards.end(), [&out, &i](const card& c){
         out << i++ <<": " << c << ' ' << std::endl;
     });
